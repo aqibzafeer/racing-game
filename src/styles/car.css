@@ -1,0 +1,751 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #101922;
+  color: #f3f4ed;
+  font-family: Arial, Helvetica, sans-serif;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+  color: inherit;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #ddf68f;
+  outline-offset: 4px;
+}
+button {
+  touch-action: manipulation;
+}
+button:disabled {
+  opacity: 0.5;
+}
+canvas {
+  display: block;
+}
+#game {
+  position: fixed;
+  inset: 0;
+  touch-action: none;
+}
+[hidden] {
+  display: none !important;
+}
+.glass {
+  background: #101b24e8;
+  border: 1px solid #ffffff24;
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
+  box-shadow: 0 16px 48px #0002;
+}
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #a6b4bd;
+  font-weight: 700;
+}
+#loading {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #101922;
+  display: grid;
+  place-items: center;
+}
+.brand {
+  position: absolute;
+  top: 36px;
+  left: 42px;
+}
+.brand h1 {
+  font-size: 52px;
+  letter-spacing: -3px;
+  margin: 9px 0;
+}
+.brand h1 span {
+  font-weight: 400;
+  color: #ddf68f;
+}
+.brand p {
+  color: #bac6cc;
+  font-size: 13px;
+}
+#lobby {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, #0c19213b, transparent 55%);
+}
+#lobbyPanel {
+  position: absolute;
+  right: 28px;
+  top: 24px;
+  bottom: 24px;
+  width: min(440px, 43vw);
+  padding: 24px;
+  overflow-y: auto;
+  pointer-events: auto;
+  scrollbar-width: thin;
+}
+.panelHeading {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+}
+.tag {
+  font-size: 9px;
+  color: #ddf68f;
+  border: 1px solid #ddf68f44;
+  border-radius: 20px;
+  padding: 5px 7px;
+}
+h3 {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 23px 0 10px;
+}
+.optionRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.optionRow.three {
+  grid-template-columns: repeat(3, 1fr);
+}
+.pick {
+  border: 1px solid #ffffff22;
+  border-radius: 9px;
+  background: #ffffff05;
+  min-height: 46px;
+  font-size: 11px;
+  padding: 8px 5px;
+  transition: background 0.15s;
+}
+.pick.active {
+  background: #ddf68f;
+  color: #192226;
+  border-color: #ddf68f;
+}
+.pick:hover {
+  border-color: #ddf68f;
+}
+.modeRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+.modeRow .pick {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  padding: 12px;
+  font-size: 12px;
+  min-height: 42px;
+}
+.modeRow small {
+  font-size: 10px;
+  opacity: 0.7;
+}
+.paintHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.paintHeading span {
+  font-size: 10px;
+  color: #a6b4bd;
+  margin-top: 12px;
+}
+.colors {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+.swatch {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  border: 3px solid #101b24;
+  background: var(--paint);
+  outline: 1px solid #ffffff44;
+}
+.swatch.active {
+  outline: 2px solid #ddf68f;
+}
+.customPaint {
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #bac6cc;
+}
+.customPaint input {
+  width: 27px;
+  height: 27px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.primary {
+  width: 100%;
+  background: #ddf68f;
+  color: #1a2527;
+  border: 0;
+  border-radius: 10px;
+  min-height: 52px;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 14px 16px;
+  margin-top: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.primary:hover {
+  background: #ebffb4;
+}
+.help {
+  font-size: 10px;
+  line-height: 1.8;
+  color: #90a1ad;
+  text-align: center;
+  margin-bottom: 0;
+}
+#vehicleCaption {
+  position: absolute;
+  left: 42px;
+  bottom: 45px;
+  width: 48%;
+}
+#vehicleCaption h2 {
+  font-size: 35px;
+  letter-spacing: -1px;
+  margin: 12px 0;
+}
+#vehicleCaption p {
+  font-size: 12px;
+  color: #a6b4bd;
+}
+#hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  touch-action: none;
+}
+#speedBox {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 14px 18px;
+}
+#speed {
+  font-size: 38px;
+  letter-spacing: -2px;
+}
+.unit {
+  font-size: 10px;
+  color: #b5c1c9;
+  margin-left: 9px;
+}
+#sceneLabel {
+  font-size: 9px;
+  color: #a6b4bd;
+}
+#raceBox {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 155px;
+  text-align: center;
+  padding: 12px 17px;
+}
+#raceBox strong {
+  display: block;
+  font-size: 26px;
+  margin: 4px;
+}
+#raceBox small {
+  font-size: 10px;
+  color: #ddf68f;
+}
+#topBar {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 280px;
+  gap: 6px;
+  justify-content: flex-end;
+  pointer-events: auto;
+}
+#topBar button {
+  padding: 10px;
+  font-size: 11px;
+  border-radius: 9px;
+  min-height: 38px;
+}
+#cameraBtn {
+  width: 100%;
+}
+#status {
+  position: absolute;
+  top: 135px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  font-size: 12px;
+  text-align: center;
+  opacity: 0;
+  transition: 0.2s;
+  max-width: 85vw;
+}
+#status.show {
+  opacity: 1;
+}
+#ghost {
+  position: absolute;
+  left: 50%;
+  top: 190px;
+  transform: translateX(-50%);
+  padding: 13px 20px;
+  border: 1px solid #ddf68f;
+  background: #172727ee;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 12px;
+  color: #ddf68f;
+  min-width: 250px;
+}
+#ghost b {
+  margin-left: 10px;
+}
+#ghost small {
+  display: block;
+  color: #cbd8da;
+  font-size: 10px;
+  margin-top: 5px;
+}
+.control {
+  position: absolute;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  width: 74px;
+  height: 74px;
+  border-radius: 20px;
+  border: 1px solid #ffffff44;
+  pointer-events: auto;
+  touch-action: none;
+  background: #142330e8;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 700;
+}
+.control.active {
+  background: #5d7958;
+  transform: scale(0.96);
+}
+#left {
+  left: 18px;
+}
+#right {
+  left: 100px;
+}
+#accel {
+  right: 18px;
+  background: #ddf68f;
+  color: #1b2a25;
+  font-size: 12px;
+}
+#brake {
+  right: 100px;
+  font-size: 11px;
+  background: #793b40ed;
+}
+#reverse {
+  right: 18px;
+  bottom: 100px;
+  font-size: 10px;
+  height: 54px;
+}
+#horn {
+  left: 18px;
+  bottom: 100px;
+  font-size: 10px;
+  height: 54px;
+}
+#auto {
+  position: absolute;
+  left: 100px;
+  bottom: 100px;
+  height: 54px;
+  padding: 10px;
+  pointer-events: auto;
+  border-radius: 12px;
+  font-size: 10px;
+}
+#auto.active {
+  color: #ddf68f;
+  border-color: #ddf68f;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: #08151cb0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.resultPanel {
+  width: min(430px, 95vw);
+  padding: 30px;
+}
+.resultPanel h2 {
+  font-size: 32px;
+  margin: 14px 0;
+}
+.resultPanel p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #b9c9d0;
+}
+.resultPanel ol {
+  list-style: none;
+  padding: 0;
+}
+.resultPanel li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff18;
+  padding: 10px 0;
+  font-size: 13px;
+}
+.resultPanel li.you {
+  color: #ddf68f;
+}
+.secondary {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid #ffffff33;
+  background: transparent;
+  border-radius: 9px;
+  margin-top: 10px;
+  font-size: 12px;
+}
+@media (max-width: 760px) {
+  .brand {
+    top: 18px;
+    left: 20px;
+  }
+  .brand h1 {
+    font-size: 32px;
+    margin: 5px 0;
+  }
+  .brand p {
+    display: none;
+  }
+  .brand .eyebrow {
+    font-size: 8px;
+  }
+  #lobbyPanel {
+    top: 39%;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    padding: 18px;
+  }
+  #vehicleCaption {
+    top: 28%;
+    left: 20px;
+    bottom: auto;
+    width: 90%;
+  }
+  #vehicleCaption h2 {
+    font-size: 19px;
+    margin: 6px 0;
+  }
+  #vehicleCaption p,
+  #vehicleCaption > .eyebrow {
+    display: none;
+  }
+  .modeRow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .modeRow .pick {
+    display: block;
+    padding: 10px 4px;
+  }
+  .modeRow strong {
+    font-size: 10px;
+  }
+  .modeRow small {
+    display: block;
+    font-size: 9px;
+    margin-top: 6px;
+  }
+  .panelHeading {
+    font-size: 9px;
+  }
+  h3 {
+    margin-top: 16px;
+  }
+  .primary {
+    margin-top: 16px;
+  }
+  #speedBox {
+    top: 10px;
+    left: 10px;
+    padding: 10px;
+  }
+  #speed {
+    font-size: 29px;
+  }
+  #raceBox {
+    top: 105px;
+    left: 10px;
+    transform: none;
+    min-width: 120px;
+    padding: 9px;
+  }
+  #raceBox strong {
+    font-size: 21px;
+  }
+  #topBar {
+    top: 10px;
+    right: 10px;
+    max-width: 177px;
+    gap: 4px;
+  }
+  #topBar button {
+    font-size: 10px;
+    padding: 8px;
+    min-height: 32px;
+  }
+  #status {
+    top: 190px;
+    font-size: 11px;
+  }
+  #ghost {
+    top: 245px;
+  }
+  .control {
+    width: 62px;
+    height: 62px;
+    bottom: 12px;
+    border-radius: 16px;
+  }
+  #left {
+    left: 12px;
+  }
+  #right {
+    left: 82px;
+  }
+  #accel {
+    right: 12px;
+  }
+  #brake {
+    right: 82px;
+  }
+  #horn {
+    left: 12px;
+    bottom: 82px;
+    height: 45px;
+  }
+  #reverse {
+    right: 12px;
+    bottom: 82px;
+    height: 45px;
+  }
+  #auto {
+    left: 82px;
+    bottom: 82px;
+    height: 45px;
+    font-size: 9px;
+    padding: 8px;
+  }
+}
+@media (max-height: 560px) and (min-width: 761px) {
+  #lobbyPanel {
+    padding: 16px;
+    top: 12px;
+    bottom: 12px;
+  }
+  .brand {
+    top: 18px;
+  }
+  .brand h1 {
+    font-size: 34px;
+  }
+  #vehicleCaption {
+    bottom: 25px;
+  }
+  .modeRow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .modeRow .pick {
+    display: block;
+  }
+  .modeRow small {
+    display: block;
+    margin-top: 4px;
+  }
+  h3 {
+    margin-top: 14px;
+  }
+}
+
+/* Keep the start action visible while the options scroll. */
+#lobbyPanel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.formOptions {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding: 3px;
+}
+.primary,
+.help {
+  flex-shrink: 0;
+}
+@media (max-width: 760px) {
+  #vehicleCaption {
+    top: 33%;
+  }
+  #lobbyPanel .help {
+    display: none;
+  }
+  #startBtn {
+    min-height: 46px;
+    margin-top: 12px;
+  }
+  .formOptions {
+    padding: 3px;
+  }
+}
+
+#game canvas {
+  cursor: grab;
+}
+#game canvas.dragging {
+  cursor: grabbing;
+}
+.previewHeading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.previewHeading h2 {
+  margin-right: 8px;
+}
+#garageReset {
+  pointer-events: auto;
+  font-size: 10px;
+  padding: 7px 10px;
+  border: 1px solid #ffffff44;
+  border-radius: 8px;
+  background: #14232be6;
+}
+#vehicleCaption .orbitHelp {
+  font-size: 11px;
+  color: #d2dfbd;
+  margin: 2px 0 8px;
+  display: block;
+}
+@media (max-width: 760px) {
+  #vehicleCaption {
+    top: 32%;
+  }
+  #vehicleCaption .orbitHelp {
+    font-size: 9px;
+    margin: 0;
+  }
+  .previewHeading {
+    gap: 6px;
+  }
+  .previewHeading h2 {
+    font-size: 17px;
+  }
+  #garageReset {
+    font-size: 9px;
+    padding: 5px 7px;
+  }
+}
+.gameSwitcher {
+  position: fixed;
+  z-index: 60;
+  left: 50%;
+  top: 8px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: #0d1921dc;
+  border: 1px solid #ffffff24;
+  backdrop-filter: blur(10px);
+}
+.gameSwitcher a {
+  color: #aebbc2;
+  text-decoration: none;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 7px 9px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.gameSwitcher a:hover,
+.gameSwitcher a.active {
+  background: #ddf68f;
+  color: #172326;
+}
+@media (max-width: 760px) {
+  .gameSwitcher {
+    top: auto;
+    bottom: 164px;
+  }
+  .gameSwitcher a {
+    padding: 6px;
+    font-size: 8px;
+  }
+}
+/* Navigation stays above garage options and never covers driving controls. */
+.gameSwitcher {
+  top: 8px;
+  bottom: auto;
+}
+body:has(#hud:not([hidden])) .gameSwitcher {
+  display: none;
+}
+@media (max-width: 760px) {
+  .brand {
+    top: 48px;
+  }
+  .brand h1 {
+    font-size: 25px;
+  }
+  .brand .eyebrow {
+    display: none;
+  }
+}

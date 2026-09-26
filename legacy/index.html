@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>Road Club &mdash; Cars & Bikes</title>
+    <link rel="stylesheet" href="car.css" />
+    <link rel="stylesheet" href="journey.css" />
+    <link rel="stylesheet" href="festival.css" />
+<link rel="stylesheet" href="showroom.css" />
+  </head>
+  <body><div id="rotateDevice" role="status"><span aria-hidden="true">&#8635;</span><h2>Rotate to drive</h2><p>Turn your phone sideways for the full Road Club experience.</p></div>
+    <div id="game"></div>
+    <div class="stageVignette" aria-hidden="true"></div>
+    <div id="loading" role="status">Preparing your garage&hellip;</div>
+    <section id="lobby" aria-label="Road Club lobby">
+      <button
+        id="homeSettingsBtn"
+        class="settingsCorner"
+        aria-label="Settings"
+        title="Settings"
+      >
+        &#9881;
+      </button>
+      <div id="vehicleArrows" aria-label="Select your vehicle">
+        <button id="prevVehicle" aria-label="Previous vehicle">&#10094;</button
+        ><button id="nextVehicle" aria-label="Next vehicle">&#10095;</button>
+      </div>
+      <header class="brand">
+        <span class="eyebrow">TWELVE RIDES. ONE OPEN ROAD.</span>
+        <h1>ROAD<span>CLUB</span></h1>
+        <p>Big skies. Bright roads. Your next ride.</p>
+        <span class="clubStatus"><i></i> WELCOME TO THE MOTOR FESTIVAL</span>
+      </header>
+      <div id="vehicleCaption">
+        <span class="eyebrow">YOUR SELECTED VEHICLE / LIVE 3D</span>
+        <div class="previewHeading">
+          <h2 id="carName">Sport Coupe</h2>
+          <button id="garageReset" title="Reset rotation and zoom">
+            Reset view
+          </button>
+        </div>
+        <p id="vehicleCount" class="intro" aria-live="polite"></p>
+        <div
+          id="vehicleStats"
+          class="vehicleStats"
+          aria-label="Selected vehicle details"
+        ></div>
+        <div class="stageActions">
+          <button id="selectVehicleBtn" class="menuAction">
+            <span>01 <strong>Select vehicle</strong></span
+            ><span>&rarr;</span></button
+          ><button id="mapsBtn" class="menuAction liveChoice" title="Next map">
+            <span><small>MAP</small><strong id="lobbyMapValue"></strong></span
+            ><span aria-hidden="true">&#8635;</span></button
+          ><button
+            id="lobbyWeatherBtn"
+            class="menuAction liveChoice"
+            title="Next weather"
+          >
+            <span
+              ><small>WEATHER</small
+              ><strong id="lobbyWeatherValue"></strong></span
+            ><span aria-hidden="true">&#8635;</span></button
+          ><button
+            id="lobbyModeBtn"
+            class="menuAction liveChoice"
+            title="Next game mode"
+          >
+            <span><small>MODE</small><strong id="lobbyModeValue"></strong></span
+            ><span aria-hidden="true">&#8635;</span>
+          </button>
+        </div>
+        <p class="orbitHelp">Drag to rotate &middot; scroll or pinch to zoom</p>
+        <p id="carSpec" class="modelDescription">
+          Rear spoiler / performance wheels / metallic finish
+        </p>
+        <div class="previewTools">
+          <button
+            id="riderPreview"
+            hidden
+            aria-label="Show rider in garage"
+            aria-pressed="false"
+          >
+            RIDER</button
+          ><button
+            id="autoRotate"
+            aria-label="Toggle automatic vehicle rotation"
+            aria-pressed="true"
+            title="Auto rotation"
+          >
+            AUTO</button
+          ><button id="rotateLeft" aria-label="Rotate vehicle left">
+            &#8630;</button
+          ><button id="rotateRight" aria-label="Rotate vehicle right">
+            &#8631;</button
+          ><button id="zoomIn" aria-label="Zoom in">+</button
+          ><button id="zoomOut" aria-label="Zoom out">&#8722;</button
+          ><button
+            id="expandPreview"
+            aria-label="Expand vehicle preview"
+            aria-pressed="false"
+          >
+            &#9974; Full screen
+          </button>
+        </div>
+      </div>
+      <main id="lobbyPanel" class="glass">
+        <div class="panelTop">
+          <span class="eyebrow" id="stepLabel">ROAD CLUB / LOBBY</span
+          ><span class="sessionBadge">LOCAL PLAY</span>
+        </div>
+        <nav id="steps" aria-label="Journey setup">
+          <button data-page="home">
+            <span class="stepNumber">&#8962;</span><span>Lobby</span></button
+          ><button data-page="vehicle">
+            <span class="stepNumber">01</span><span>Vehicle</span></button
+          ><button data-page="maps">
+            <span class="stepNumber">02</span><span>Maps</span></button
+          ><button data-page="weather">
+            <span class="stepNumber">03</span><span>Weather</span></button
+          ><button data-page="mode">
+            <span class="stepNumber">04</span><span>Mode</span></button
+          ><button data-page="ready">
+            <span class="stepNumber">05</span><span>Review</span>
+          </button>
+        </nav>
+        <div class="formOptions">
+          <section data-screen="home">
+            <span class="eyebrow">WELCOME TO YOUR LOBBY</span>
+            <h2>GOOD ROADS.<br /><em>GREAT RIDES.</em></h2>
+            <p class="intro">
+              Pick your machine. Set the scene.<br />There is a whole road
+              waiting for you.
+            </p>
+            <div class="selectionCard">
+              <span class="eyebrow">READY IN YOUR GARAGE</span>
+              <h3 id="homeVehicle">Sport Coupe</h3>
+              <p id="homeSummary"></p>
+              <button id="quickDriveBtn" class="textButton">
+                Review this journey &rarr;
+              </button>
+            </div>
+            <div class="clubNumbers">
+              <span><b>12</b>VEHICLES</span><span><b>07</b>ROADS</span
+              ><span><b>04</b>WEATHERS</span><span><b>03</b>MODES</span>
+            </div>
+          </section>
+          <section data-screen="vehicle" hidden>
+            <span class="eyebrow">01 / FIND YOUR RIDE</span>
+            <div class="carouselHeading"><h2>Select vehicle</h2></div>
+            <div class="paintHeading">
+              <h3>Paint finish</h3>
+              <span id="paintName">Racing red</span>
+            </div>
+            <div id="colorChoices" class="colors">
+              <button
+                class="swatch active"
+                style="--paint: #c92936"
+                data-color="#c92936"
+                data-name="Racing red"
+                aria-label="Racing red"
+              ></button>
+              <button
+                class="swatch"
+                style="--paint: #2373d7"
+                data-color="#2373d7"
+                data-name="Atlantic blue"
+                aria-label="Atlantic blue"
+              ></button>
+              <button
+                class="swatch"
+                style="--paint: #e9e6de"
+                data-color="#e9e6de"
+                data-name="Pearl white"
+                aria-label="Pearl white"
+              ></button>
+              <button
+                class="swatch"
+                style="--paint: #242930"
+                data-color="#242930"
+                data-name="Carbon black"
+                aria-label="Carbon black"
+              ></button>
+              <button
+                class="swatch"
+                style="--paint: #cc9424"
+                data-color="#cc9424"
+                data-name="Saffron gold"
+                aria-label="Saffron gold"
+              ></button>
+              <button
+                class="swatch"
+                style="--paint: #326650"
+                data-color="#326650"
+                data-name="Forest green"
+                aria-label="Forest green"
+              ></button>
+              <label class="customPaint" title="Choose any paint color"
+                >Custom<input
+                  id="customColor"
+                  type="color"
+                  value="#c92936"
+                  aria-label="Custom car color"
+              /></label>
+            </div>
+            <div id="riderOptions" hidden>
+              <h3>Riding gear</h3>
+              <div class="optionRow three">
+                <button class="pick active" data-rider="0">Racing red</button
+                ><button class="pick" data-rider="1">Blue & gold</button
+                ><button class="pick" data-rider="2">Carbon</button>
+              </div>
+            </div>
+            <p class="intro compactHelp">
+              Drag the vehicle to rotate. Use + / &minus; to zoom, or expand for
+              a closer look.
+            </p>
+          </section>
+          <section data-screen="maps" hidden>
+            <span class="eyebrow">02 / SET THE SCENE</span>
+            <h2>Choose a road</h2>
+            <div
+              id="mapPreview"
+              class="mapPreview"
+              role="img"
+              aria-label="Countryside road preview"
+            >
+              <svg viewBox="0 0 480 230" aria-hidden="true">
+                <circle class="mapSun" cx="385" cy="42" r="23" />
+                <path
+                  class="mapHills"
+                  d="M0 110L75 35L157 106L270 18L365 112L450 45L480 90V230H0Z"
+                />
+                <path class="mapGround" d="M0 130Q150 85 480 123V230H0Z" />
+                <path
+                  d="M105 240C90 175 360 160 252 104L238 84"
+                  fill="none"
+                  stroke="#c5cebf"
+                  stroke-width="61"
+                />
+                <path
+                  d="M105 240C90 175 360 160 252 104L238 84"
+                  fill="none"
+                  stroke="#34444a"
+                  stroke-width="52"
+                />
+                <path
+                  d="M105 240C90 175 360 160 252 104L238 84"
+                  fill="none"
+                  stroke="#f3dc8a"
+                  stroke-width="3"
+                  stroke-dasharray="12 10"
+                />
+                <g class="mapCity" fill="#314654">
+                  <path
+                    d="M10 132V53H53V130M62 119V22H99V117M366 120V35H405V123M420 130V63H469V136"
+                  />
+                </g>
+                <g class="mapTrees" fill="#233f38">
+                  <path
+                    d="M18 148L42 75L67 148ZM83 134L102 65L125 134ZM352 157L380 79L407 157ZM419 176L449 83L479 176Z"
+                  />
+                </g>
+                <g class="mapRain" stroke="#afdef2" stroke-width="2">
+                  <path
+                    d="M40 10L25 40M110 50L95 80M180 10L165 40M270 30L255 60M350 10L335 40M440 70L425 100M120 130L105 160M310 150L295 180"
+                  />
+                </g>
+                <g class="mapSnow" fill="white">
+                  <circle cx="40" cy="35" r="4" />
+                  <circle cx="150" cy="75" r="4" />
+                  <circle cx="250" cy="35" r="4" />
+                  <circle cx="370" cy="75" r="4" />
+                  <circle cx="420" cy="160" r="4" />
+                  <circle cx="240" cy="170" r="4" />
+                </g></svg
+              ><span id="mapBadge"></span>
+            </div>
+            <div class="carouselHeading">
+              <button id="prevRoad" aria-label="Previous road">&#10094;</button>
+              <div>
+                <h3 id="roadTitle" aria-live="polite"></h3>
+                <p id="roadCount"></p>
+              </div>
+              <button id="nextRoad" aria-label="Next road">&#10095;</button>
+            </div>
+            <p id="roadDescription" class="intro"></p>
+            <div
+              id="roadChoices"
+              class="choiceGrid"
+              aria-label="All roads"
+            ></div>
+          </section>
+          <section data-screen="weather" hidden>
+            <span class="eyebrow">03 / SET THE WEATHER</span>
+            <h2>Choose your weather</h2>
+            <p class="intro">See your selected road in a different light.</p>
+            <div
+              id="weatherPreview"
+              class="mapPreview"
+              role="img"
+              aria-label="Countryside road preview"
+            >
+              <svg viewBox="0 0 480 230" aria-hidden="true">
+                <circle class="mapSun" cx="385" cy="42" r="23" />
+                <path
+                  class="mapHills"
+                  d="M0 110L75 35L157 106L270 18L365 112L450 45L480 90V230H0Z"
+                />
+                <path class="mapGround" d="M0 130Q150 85 480 123V230H0Z" />
+                <path
+                  d="M105 240C90 175 360 160 252 104L238 84"
+                  fill="none"
+                  stroke="#c5cebf"
+                  stroke-width="61"
+                />
+                <path
+                  d="M105 240C90 175 360 160 252 104L238 84"
+                  fill="none"
+                  stroke="#34444a"
+                  stroke-width="52"
+                />
+                <path
+                  d="M105 240C90 175 360 160 252 104L238 84"
+                  fill="none"
+                  stroke="#f3dc8a"
+                  stroke-width="3"
+                  stroke-dasharray="12 10"
+                />
+                <g class="mapCity" fill="#314654">
+                  <path
+                    d="M10 132V53H53V130M62 119V22H99V117M366 120V35H405V123M420 130V63H469V136"
+                  />
+                </g>
+                <g class="mapTrees" fill="#233f38">
+                  <path
+                    d="M18 148L42 75L67 148ZM83 134L102 65L125 134ZM352 157L380 79L407 157ZM419 176L449 83L479 176Z"
+                  />
+                </g>
+                <g class="mapRain" stroke="#afdef2" stroke-width="2">
+                  <path
+                    d="M40 10L25 40M110 50L95 80M180 10L165 40M270 30L255 60M350 10L335 40M440 70L425 100M120 130L105 160M310 150L295 180"
+                  />
+                </g>
+                <g class="mapSnow" fill="white">
+                  <circle cx="40" cy="35" r="4" />
+                  <circle cx="150" cy="75" r="4" />
+                  <circle cx="250" cy="35" r="4" />
+                  <circle cx="370" cy="75" r="4" />
+                  <circle cx="420" cy="160" r="4" />
+                  <circle cx="240" cy="170" r="4" />
+                </g></svg
+              ><span id="weatherMapBadge"></span>
+            </div>
+            <div class="carouselHeading weatherCard">
+              <button id="prevWeather" aria-label="Previous weather">
+                &#10094;
+              </button>
+              <div>
+                <strong id="weatherTitle" aria-live="polite"></strong>
+                <p id="weatherDescription"></p>
+              </div>
+              <button id="nextWeather" aria-label="Next weather">
+                &#10095;
+              </button>
+            </div>
+            <div
+              id="weatherChoices"
+              class="choiceGrid weatherChoices"
+              aria-label="All weather conditions"
+            ></div>
+          </section>
+          <section data-screen="mode" hidden>
+            <span class="eyebrow">04 / MAKE IT YOUR JOURNEY</span>
+            <h2>Find your pace.</h2>
+            <p class="intro">
+              Select a game mode, then press Next to review your journey.
+            </p>
+            <div class="modeRow">
+              <button class="pick active" data-mode="free">
+                <strong>Free ride</strong><small>Endless road + traffic</small>
+              </button>
+              <button class="pick" data-mode="race">
+                <strong>30-second race</strong><small>You + 4 opponents</small>
+              </button>
+              <button class="pick" data-mode="roam">
+                <strong>Open roam</strong
+                ><small>No barriers. Leave the road.</small>
+              </button>
+            </div>
+          </section>
+          <section data-screen="ready" hidden>
+            <span class="eyebrow">ALL SET / THE ROAD IS YOURS</span>
+            <h2>Ready when you are.</h2>
+            <div class="readyBanner">
+              <span class="readyIcon">&#10003;</span>
+              <div>
+                <strong>YOUR JOURNEY IS READY</strong
+                ><small>One last look. Then the open road.</small>
+              </div>
+            </div>
+            <div id="journeySummary" class="selectionCard"></div>
+            <p class="intro">
+              &uarr; Accelerate &middot; &darr; Reverse &middot; &larr; / &rarr;
+              Steer<br />Space: Brake &middot; Ctrl: Turbo &middot; R: Center<br />W:
+              Weather &middot; C: Camera &middot; Esc: Pause
+            </p>
+            <p class="intro">On touch screens, hold the driving controls.</p>
+          </section>
+        </div>
+        <div id="nextHint" class="nextHint"></div>
+        <div class="pageActions">
+          <button id="backBtn" class="secondary" hidden>&larr; Back</button
+          ><button id="nextBtn" class="primary">START GAME &rarr;</button
+          ><button id="startBtn" class="primary" hidden>GO &rarr;</button>
+        </div>
+      </main>
+    </section>
+    <div id="countdown" hidden aria-live="polite">
+      <span>READY TO RACE</span><strong id="countdownValue">3</strong
+      ><small>Hold &uarr; to launch</small>
+    </div>
+    <div id="graphicsNotice" hidden role="alert">
+      Graphics paused. Waiting for the display to recover&hellip;
+    </div>
+    <section id="hud" hidden aria-label="Driving controls">
+      <div id="speedBox" class="glass">
+        <span class="eyebrow">LIVE SPEED</span>
+        <div><b id="speed">0</b><span class="unit">KM/H</span></div>
+        <small class="tripReadout">DISTANCE <b id="tripDistance">0 m</b></small>
+        <small id="sceneLabel">COUNTRYSIDE / SUNNY</small>
+      </div>
+      <div id="raceBox" class="glass">
+        <span id="modeLabel" class="eyebrow">FREE RIDE</span
+        ><strong id="timer">0.00 km</strong
+        ><small id="position">ENDLESS ROAD</small>
+      </div>
+      <div id="topBar">
+        <label id="liveMapControl" class="glass" hidden
+          >Map
+          <select
+            id="liveMapSelect"
+            aria-label="Change map during free ride"
+          ></select></label
+        ><button id="cameraBtn" class="glass">Camera: Chase</button
+        ><button id="sceneBtn" class="glass">Weather</button
+        ><button id="resetBtn" class="glass" title="Center the vehicle (R)">
+          Center</button
+        ><button id="lobbyBtn" class="glass">Pause &#10074;&#10074;</button>
+      </div>
+      <div id="status" class="glass" role="status"></div>
+      <div id="ghost" hidden>
+        GHOST RECOVERY <b>2.0s</b
+        ><small
+          >Keep driving - traffic collisions are temporarily disabled</small
+        >
+      </div>
+      <button id="left" class="control" aria-label="Steer left">&larr;</button
+      ><button id="right" class="control" aria-label="Steer right">
+        &rarr;
+      </button>
+      <button id="horn" class="control">HORN</button
+      ><button id="auto" class="glass" aria-pressed="false">
+        AUTO DRIVE: OFF
+      </button>
+      <button id="turbo" class="control" aria-label="Hold turbo">TURBO</button>
+      <div
+        id="turboMeter"
+        role="progressbar"
+        aria-label="Turbo charge"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="100"
+      >
+        <span>TURBO <b id="turboCharge">100%</b></span>
+        <div><i id="turboFill"></i></div>
+      </div>
+      <span id="turboStatus" hidden>TURBO ACTIVE</span
+      ><button id="reverse" class="control">REVERSE</button
+      ><button id="brake" class="control">BRAKE</button
+      ><button id="accel" class="control">HOLD<br />DRIVE</button>
+    </section>
+    <section
+      id="results"
+      class="overlay"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="resultTitle"
+    >
+      <div class="glass resultPanel">
+        <span class="eyebrow">30-SECOND SPRINT / COMPLETE</span>
+        <h2 id="resultTitle">Race complete</h2>
+        <p id="resultSummary"></p>
+        <ol id="standings"></ol>
+        <button id="againBtn" class="primary">RACE AGAIN &rarr;</button
+        ><button id="resultGarageBtn" class="secondary">BACK TO HOME</button>
+      </div>
+    </section>
+    <section
+      id="pauseOverlay"
+      class="overlay"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="pauseTitle"
+    >
+      <div class="glass resultPanel">
+        <span class="eyebrow">TAKE YOUR TIME</span>
+        <div class="pauseGlyph" aria-hidden="true">&#10074;&#10074;</div>
+        <h2 id="pauseTitle">Take a breather.</h2>
+        <p>Your road will be right here.</p>
+        <p id="pauseSummary" class="pauseSummary"></p>
+        <button id="resumeBtn" class="primary">RESUME DRIVE</button
+        ><button id="restartBtn" class="secondary">RESTART</button
+        ><button id="pauseSettingsBtn" class="secondary">SETTINGS</button
+        ><button id="pauseHomeBtn" class="secondary">BACK TO HOME</button>
+      </div>
+    </section>
+
+    <section
+      id="settingsOverlay"
+      class="overlay"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="settingsTitle"
+    >
+      <div class="glass resultPanel">
+        <span class="eyebrow">YOUR PREFERENCES</span>
+        <h2 id="settingsTitle">Settings</h2>
+        <p id="settingsContext"></p>
+        <div class="settingsSection">AUDIO &amp; DISPLAY</div>
+        <label class="settingRow"
+          >Sound <input id="soundSetting" type="checkbox" checked /></label
+        ><label class="settingRow"
+          >Camera
+          <select id="cameraSetting" aria-label="Camera view"></select></label
+        ><label class="settingRow"
+          >Graphics
+          <select id="qualitySetting">
+            <option value="high">High</option>
+            <option value="low">Performance</option>
+          </select></label
+        >
+        <div class="controlsGuide">
+          <span class="eyebrow">KEYBOARD CONTROLS</span>
+          <p>
+            <kbd>&uarr;</kbd> Accelerate <kbd>&darr;</kbd> Reverse
+            <kbd>&larr; &rarr;</kbd> Steer
+          </p>
+          <p>
+            <kbd>Space</kbd> Brake <kbd>Ctrl</kbd> Turbo <kbd>R</kbd> Center
+          </p>
+          <p><kbd>W</kbd> Weather <kbd>C</kbd> Camera <kbd>Esc</kbd> Pause</p>
+        </div>
+        <button id="closeSettingsBtn" class="primary">SAVE & BACK</button>
+      </div>
+    </section>
+    <script src="car-loader.js"></script>
+    <script src="vendor/three-0.169.0.js"></script>
+    <script src="realism.js"></script>
+    <script src="car-world.js"></script>
+    <script src="car-weather.js"></script>
+    <script src="bike-assets.js"></script>
+    <script src="vehicle-assets.js"></script>
+    <script src="car-game.js"></script>
+    <script src="journey.js"></script>
+  </body>
+</html>

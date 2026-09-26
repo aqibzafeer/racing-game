@@ -1,0 +1,656 @@
+/* Bright festival presentation, while retaining the centered showroom and separate setup pages. */
+:root {
+  --accent: #006fa6;
+  --ink: #173347;
+  --muted: #567486;
+  --line: #18466a20;
+}
+body {
+  background: #bce9fb;
+  color: #173347;
+}
+.stageVignette {
+  background: linear-gradient(0deg, #e5f7ff80, transparent 35%);
+  opacity: 0.5;
+}
+#lobby {
+  background: transparent;
+}
+.brand h1 {
+  color: #123449;
+  text-shadow: 0 2px #ffffff60;
+}
+.brand h1 span {
+  color: #007ead;
+}
+.brand .eyebrow {
+  color: #2b6482;
+}
+.brand p {
+  color: #416979;
+}
+.clubStatus {
+  background: #ffffffb8;
+  border-color: #a4cfdf;
+  color: #316782;
+}
+.clubStatus i {
+  background: #ff7b38;
+  box-shadow: none;
+}
+.settingsCorner {
+  background: #ffffffd9;
+  border-color: #9bc9dd;
+  color: #176b98;
+  box-shadow: 0 4px 18px #336b8020;
+}
+.settingsCorner:hover {
+  background: #e4f8ff;
+}
+#vehicleArrows button {
+  background: #ffffffce;
+  border-color: #95cbdc;
+  color: #0077ad;
+  box-shadow: 0 6px 20px #2664821c;
+}
+#vehicleArrows button:hover {
+  background: #fff;
+  border-color: #ff8550;
+  color: #dd521e;
+}
+#vehicleCaption .previewHeading h2 {
+  color: #153c51;
+  text-shadow: 0 2px 0 #ffffff85;
+  font-weight: 750;
+}
+#vehicleCaption #vehicleCount {
+  color: #467286;
+}
+#vehicleCaption #vehicleStats {
+  background: #ffffffcf;
+  border-color: #aed3e0;
+  box-shadow: 0 10px 30px #386f8310;
+}
+#vehicleStats small {
+  color: #587d8d;
+}
+#vehicleStats strong {
+  color: #154967;
+}
+.stageActions .menuAction {
+  background: #ffffffd9;
+  border-color: #b0d4df;
+  color: #057daf;
+}
+.stageActions .menuAction strong {
+  color: #224e62;
+}
+.stageActions .menuAction:hover {
+  background: #fff;
+  box-shadow: 0 5px 16px #3a71831a;
+}
+.previewTools button,
+#garageReset {
+  background: #ffffffcc;
+  color: #386b80;
+  border-color: #a9cfdc;
+}
+#autoRotate[aria-pressed="true"],
+#riderPreview[aria-pressed="true"] {
+  color: #006991;
+  background: #dcf4ff;
+  border-color: #62b5d4;
+}
+#riderPreview {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+.previewTools button:hover,
+#garageReset:hover {
+  background: #fff;
+  border-color: #ff9a61;
+}
+#vehicleCaption #carSpec.modelDescription {
+  display: block;
+  color: #4d7280;
+  font-size: 10px;
+  max-width: none;
+  margin: 7px 0 3px;
+  line-height: 1.5;
+}
+#vehicleCaption .previewTools {
+  margin-top: 6px;
+}
+.previewExpanded #vehicleCaption {
+  background: #ffffffd9 !important;
+  border-color: #a3cada;
+}
+.previewExpanded .stageVignette {
+  background: radial-gradient(ellipse, transparent, #83cfe72a);
+}
+#lobbyPanel,
+body[data-page="vehicle"] #lobbyPanel {
+  background: linear-gradient(135deg, #fffffff5, #eaf7fff5);
+  border-color: #9bcbdc;
+  box-shadow: 0 18px 55px #386f8226;
+}
+body[data-page="home"] #lobbyPanel {
+  background: transparent;
+  box-shadow: none;
+}
+#steps {
+  border-color: #216b8520;
+}
+#steps button {
+  color: #567486;
+}
+#steps button:hover {
+  background: #dbeefa;
+  color: #1e657f;
+}
+#steps button.active {
+  background: #d9f2ff;
+  color: #006694;
+  border-color: #86c8e2;
+}
+#steps button.complete .stepNumber {
+  color: #1684a9;
+}
+.panelTop .eyebrow {
+  color: #3c6a7f;
+}
+.sessionBadge {
+  color: #14835c;
+}
+.eyebrow {
+  color: #4b7d8f;
+}
+.intro,
+.selectionCard p {
+  color: #577584;
+}
+.nextHint {
+  color: #44798f;
+}
+.primary {
+  background: linear-gradient(110deg, #ffb147, #ff7c45);
+  color: #173746;
+  border: 1px solid #ff8a4b;
+  box-shadow: 0 8px 22px #ed894e25;
+  font-weight: 800;
+}
+.primary:hover {
+  background: linear-gradient(110deg, #ffc76b, #ff985e);
+  color: #103044;
+}
+.secondary {
+  background: #ffffffb8;
+  border-color: #a1c6d5;
+  color: #295e76;
+}
+.secondary:hover {
+  background: #e4f4ff;
+}
+.pick {
+  background: #f4fbff;
+  border-color: #b6d2df;
+  color: #335d71;
+}
+.pick:hover {
+  background: #e3f4ff;
+}
+.pick.active,
+.pick.active:hover {
+  background: #d5f1ff;
+  border-color: #58afd3;
+  color: #065f85;
+}
+.modeRow .pick:before {
+  color: #398dae;
+}
+.modeRow .pick.active:before {
+  color: #ec7734;
+}
+.choiceGrid .active:before {
+  color: #f3833c;
+}
+.weatherChoices small {
+  color: #5e8090;
+}
+.weatherIcon {
+  color: #0789bc;
+}
+.weatherCard {
+  background: #f4fcff;
+  border-color: #a8cede;
+}
+.weatherCard p {
+  color: #658291;
+}
+.weatherCard strong {
+  color: #18556f;
+}
+.carouselHeading > button {
+  background: #ffffff;
+  border-color: #a3c6d6;
+  color: #1f7294;
+}
+.carouselHeading > button:hover {
+  background: #dcf3ff;
+}
+.carouselHeading p {
+  color: #648190;
+}
+.mapPreview {
+  border-color: #98c6d4;
+}
+.mapPreview:not([data-weather="night"]):not([data-weather="rain"]):not(
+    [data-weather="snow"]
+  ) {
+  background: linear-gradient(#66c5f3, #d9f7fd);
+}
+.mapPreview .mapGround {
+  fill: #8bc863;
+}
+.mapPreview .mapHills {
+  fill: #68a485;
+}
+.mapPreview[data-weather="rain"] {
+  background: linear-gradient(#70a1c2, #c0dae9);
+}
+.colors .swatch {
+  border-color: #fff;
+  outline-color: #a9c9d3;
+}
+.swatch.active {
+  outline-color: #178eb7;
+}
+.customPaint,
+.paintHeading span {
+  color: #547c8b;
+}
+.formOptions {
+  scrollbar-color: #81b9cf transparent;
+}
+.selectionCard {
+  background: #effaff;
+  border-color: #abd1de;
+}
+.textButton {
+  color: #00779f;
+}
+.readyIcon {
+  background: #def8ec;
+  border-color: #8bc9ae;
+  color: #168358;
+}
+.readyBanner strong {
+  color: #137950;
+}
+.readyBanner small {
+  color: #64818f;
+}
+#journeySummary strong {
+  color: #23526a;
+}
+#journeySummary p {
+  border-color: #c2dce6;
+}
+.summaryEdit {
+  background: #d9f0fc;
+  color: #20647d;
+}
+.clubNumbers span {
+  color: #6d8994;
+}
+.clubNumbers b {
+  color: #2b617c;
+}
+.resultPanel {
+  background: linear-gradient(145deg, #fff, #edf8ff);
+  border-color: #a5cfdf;
+  color: #214d64;
+  box-shadow: 0 28px 80px #18365255;
+}
+.resultPanel p {
+  color: #557787;
+}
+.resultPanel h2 {
+  color: #17445d;
+}
+.resultPanel li {
+  border-color: #b5d4de;
+  color: #396577;
+}
+.resultPanel li.you {
+  color: #007ba9;
+  font-weight: 700;
+}
+.overlay {
+  background: #24485e70;
+  backdrop-filter: blur(8px);
+}
+.pauseGlyph {
+  color: #f38240;
+}
+.pauseSummary {
+  background: #e1f3fd;
+  border-color: #b1d5e5;
+  color: #2b6785 !important;
+}
+.settingsSection {
+  color: #007ca6;
+}
+.settingRow {
+  border-color: #b8d5e1;
+}
+.settingRow select {
+  background: #fff;
+  border-color: #a5c8d8;
+  color: #245a76;
+}
+.settingRow input {
+  accent-color: #098ac0;
+}
+.controlsGuide {
+  background: #e6f4fb;
+}
+.controlsGuide p {
+  color: #55798a;
+}
+kbd {
+  background: #fff;
+  border-color: #aecddd;
+  color: #21516a;
+}
+#hud {
+  color: #f5fcff;
+}
+#hud .glass {
+  background: #123448e8;
+  border-color: #4ca2c04d;
+  color: #effbff;
+}
+#hud .eyebrow {
+  color: #95daec;
+}
+#hud #sceneLabel {
+  color: #b1d9e4;
+}
+#hud #position {
+  color: #ffc974;
+}
+#lobbyBtn {
+  color: #9befff !important;
+  border-color: #62c5e0 !important;
+}
+.control {
+  background: #1b4c65ed;
+  border-color: #75b9d07d;
+  color: #fff;
+}
+#accel {
+  background: #ffb35c;
+  color: #14344a;
+}
+#brake {
+  background: #d75159;
+  color: #fff;
+}
+#turbo {
+  background: #087ca8;
+  color: #efffff;
+}
+#turbo.active {
+  background: #4cdef1;
+  color: #0d344d;
+}
+#hud #auto.active {
+  border-color: #74e9fa;
+  color: #74e9fa;
+}
+#liveMapSelect {
+  background: #23526b;
+  color: #f3fbff;
+  border-color: #4386a0;
+}
+#turboMeter {
+  position: absolute;
+  left: 50%;
+  bottom: 25px;
+  transform: translateX(-50%);
+  width: 150px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #e6faff;
+  pointer-events: none;
+  padding: 9px 12px;
+  background: #17394ada;
+  border: 1px solid #4fa9c780;
+  border-radius: 10px;
+}
+#turboMeter > span {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+#turboMeter > div {
+  height: 5px;
+  border-radius: 4px;
+  background: #355b6b;
+  overflow: hidden;
+}
+#turboFill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #24b5ec, #9cf8eb);
+  border-radius: 4px;
+}
+#turboStatus {
+  color: #80f2ff;
+  background: #164c65dd;
+}
+#countdown {
+  position: fixed;
+  z-index: 25;
+  left: 50%;
+  top: 31%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+  pointer-events: none;
+  text-shadow: 0 4px 20px #24465888;
+}
+#countdown > span {
+  font-size: 11px;
+  letter-spacing: 3px;
+  display: block;
+  background: #175071db;
+  border: 1px solid #84d7ed;
+  padding: 9px 18px;
+  border-radius: 20px;
+}
+#countdown strong {
+  display: block;
+  font-size: 100px;
+  line-height: 1.3;
+  color: #ffe792;
+}
+#countdown small {
+  font-size: 12px;
+  background: #173c56c9;
+  padding: 8px 13px;
+  border-radius: 8px;
+}
+#graphicsNotice {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: grid;
+  place-items: center;
+  background: #dff6ff;
+  color: #1b546b;
+  padding: 30px;
+  text-align: center;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline-color: #007eb5;
+}
+#loading {
+  background: #dcf4ff;
+  color: #195a76;
+}
+.modelNote {
+  font-size: 9px;
+  color: #65899c;
+  text-align: center;
+}
+@media (max-width: 760px) {
+  #vehicleCaption #carSpec.modelDescription {
+    font-size: 8px;
+    line-height: 1.3;
+    margin: 5px 0;
+  }
+  #vehicleCaption .previewTools {
+    gap: 4px;
+  }
+  .previewTools button {
+    min-width: 31px;
+    height: 32px;
+  }
+  #riderPreview {
+    font-size: 7px;
+  }
+  #turboMeter {
+    bottom: 151px;
+    left: 12px;
+    transform: none;
+    width: 132px;
+    padding: 7px 10px;
+    font-size: 8px;
+  }
+  #turboStatus {
+    top: 205px;
+  }
+  .previewExpanded #vehicleCaption #carSpec {
+    display: none;
+  }
+  #countdown strong {
+    font-size: 76px;
+  }
+  .settingsCorner {
+    box-shadow: 0 4px 12px #316d7e20;
+  }
+}
+@media (max-height: 600px) and (min-width: 761px) {
+  #vehicleCaption #carSpec.modelDescription {
+    display: none;
+  }
+  #turboMeter {
+    bottom: 18px;
+    width: 130px;
+  }
+}
+
+@media (max-height: 600px) and (min-width: 761px) {
+  body[data-page="vehicle"] #lobbyPanel {
+    height: 118px;
+    padding: 8px 14px;
+  }
+  body[data-page="vehicle"] #vehicleCaption {
+    bottom: 138px;
+  }
+  body[data-page="vehicle"] #vehicleCount {
+    display: none;
+  }
+  body[data-page="vehicle"] #vehicleStats {
+    padding: 5px 0;
+  }
+  body[data-page="vehicle"] .previewTools button {
+    height: 27px;
+    min-width: 29px;
+  }
+  body[data-page="vehicle"] .pageActions {
+    padding-top: 5px;
+  }
+  body[data-page="vehicle"] .pageActions button {
+    min-height: 36px;
+  }
+  body[data-page="vehicle"] #vehicleCaption .previewHeading h2 {
+    font-size: 21px !important;
+  }
+}
+
+/* Live journey controls remain under the vehicle, with no separate sidebar. */
+body[data-page="home"] .stageActions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+body[data-page="home"] .stageActions .menuAction {
+  width: auto;
+  min-width: 0;
+  min-height: 50px;
+  margin: 3px 0;
+  padding: 8px 10px;
+  gap: 5px;
+}
+.stageActions .liveChoice small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  color: #537689;
+  margin-bottom: 4px;
+}
+.stageActions .liveChoice strong {
+  display: block;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.3;
+}
+#vehicleCaption {
+  border-radius: 16px;
+  background: linear-gradient(180deg, #effaffdf, #effaffc9);
+  padding: 9px 12px;
+  box-sizing: border-box;
+}
+@media (max-width: 760px) {
+  body[data-page="home"] .stageActions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 7px;
+  }
+  body[data-page="home"] .stageActions .menuAction {
+    min-height: 43px;
+    padding: 6px 9px;
+  }
+  .stageActions .liveChoice strong {
+    font-size: 10px;
+  }
+  .stageActions .liveChoice small {
+    font-size: 7px;
+    margin-bottom: 2px;
+  }
+  #vehicleCaption {
+    padding: 7px 8px;
+  }
+}
+@media (max-height: 600px) and (min-width: 761px) {
+  body[data-page="home"] .stageActions .menuAction {
+    min-height: 39px;
+    padding: 5px 7px;
+  }
+  .stageActions .liveChoice strong {
+    font-size: 9px;
+  }
+  .stageActions .liveChoice small {
+    font-size: 6px;
+    margin-bottom: 2px;
+  }
+  #vehicleCaption {
+    padding: 5px 9px;
+  }
+}
